@@ -7,7 +7,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 logging.basicConfig(level=logging.INFO)
 
 TOKEN = "8603795983:AAGfLpgumuuFv3i7UGi-bAvpPwen49SYR_U"
-CLAUDE_KEY = CLAUDE_KEY = "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"
+CLAUDE_KEY = "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"
 
 KNOWLEDGE = """
 EMET Ukraine — дистриб'ютор ін'єкційних препаратів для естетичної медицини.
