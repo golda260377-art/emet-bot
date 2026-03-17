@@ -8,7 +8,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 logging.basicConfig(level=logging.INFO)
 
 TOKEN = "8603795983:AAGfLpgumuuFv3i7UGi-bAvpPwen49SYR_U"
-CLAUDE_KEY = "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"
+CLAUDE_KEY = "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"
 
 KNOWLEDGE = """
 # БАЗА ЗНАНЬ EMET UKRAINE
