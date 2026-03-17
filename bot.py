@@ -6,22 +6,13 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = "8603795983:AAGfLpgumuuFv3i7UGi-bAvpPwen49SYR_U"
-CLAUDE_KEY = "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"
-def load_knowledge():
-    folder = r"C:\Users\User\Desktop\EMET DATA BASE 3"
-    text = ""
-    for filename in os.listdir(folder):
-        if filename.endswith(".md") or filename.endswith(".txt"):
-            filepath = os.path.join(folder, filename)
-            try:
-                with open(filepath, "r", encoding="utf-8") as f:
-                    text += f"\n\n=== {filename} ===\n" + f.read()
-            except:
-                pass
-    return text[:50000]
+TOKEN = os.environ.get("TOKEN", "")
+CLAUDE_KEY = os.environ.get("CLAUDE_KEY", "")
 
-KNOWLEDGE = load_knowledge()
+KNOWLEDGE = """
+EMET Ukraine — дистриб'ютор ін'єкційних препаратів для естетичної медицини.
+Продукти: Neuramis, Ellanse, Exoxe, Esse, Neuronox, Magnox, Vitaran, Petaran, iUse.
+"""
 
 MENU = ReplyKeyboardMarkup([
     [KeyboardButton("🎯 Sales Coach"), KeyboardButton("📚 Навчання")],
@@ -73,7 +64,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("⏳ Думаю...")
     try:
         client = anthropic.AsyncAnthropic(api_key=CLAUDE_KEY)
-        system = f"{MODES[mode]}\n\nВідповідай ТІЛЬКИ на основі бази знань. Якщо немає інформації — скажи про це.\n\nБАЗА ЗНАНЬ:\n{KNOWLEDGE}"
+        system = f"{MODES[mode]}\n\nБАЗА ЗНАНЬ:\n{KNOWLEDGE}"
         message = await client.messages.create(
             model="claude-haiku-4-5-20251001",
             max_tokens=1024,
