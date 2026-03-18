@@ -286,7 +286,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     except Exception:
                         pass
 
-        await sent_message.edit_text(full_text)
+        if len(full_text) <= 4000:
+            await sent_message.edit_text(full_text)
+        else:
+            await sent_message.edit_text(full_text[:4000])
+            remaining = full_text[4000:]
+            while remaining:
+                await update.message.reply_text(remaining[:4000])
+                remaining = remaining[4000:]
+
         await update.message.reply_text("Обери режим:", reply_markup=MENU)
 
     except Exception as e:
