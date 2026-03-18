@@ -312,8 +312,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await update.message.reply_text(remaining[:4000])
                 remaining = remaining[4000:]
 
-        await update.message.reply_text("Обери режим:", reply_markup=MENU)
-
     except Exception as e:
         await sent_message.edit_text(f"Помилка: {str(e)}")
 
